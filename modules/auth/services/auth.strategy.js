@@ -14,6 +14,7 @@ passport.use(
       User.find({
         _id: payload.id,
         token: req.headers.authorization.split(" ")[1],
+        verify: true,
       })
         .then((user) => {
           if (user) {
