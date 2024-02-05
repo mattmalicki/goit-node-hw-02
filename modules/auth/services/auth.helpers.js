@@ -1,4 +1,6 @@
 import gravatar from "gravatar";
+import { nanoid } from "nanoid";
+import { sendVerificationEmail } from "../../shared/services/mail.js";
 import { User } from "../../users/schemas/user.schema.js";
 
 async function signupUser(body) {
@@ -10,6 +12,12 @@ async function signupUser(body) {
   user.setPassword(password);
   const avatarURL = gravatar.url(email, { s: 250, protocol: "https" });
   avatarURL && user.setAvatarUrl(avatarURL);
+  const verificationToken = nanoid();
+  user.verificationToken = verificationToken;
+  sendVerificationEmail({
+    emailTo: user.email,
+    emailToken: verificationToken,
+  });
   await user.save();
   return user;
 }
