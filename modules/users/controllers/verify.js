@@ -1,4 +1,4 @@
-import { User } from "../schemas/user.schema";
+import { User } from "../schemas/user.schema.js";
 
 export async function verifyToken(req, res) {
   try {
