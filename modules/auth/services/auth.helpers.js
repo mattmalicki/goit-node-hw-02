@@ -1,7 +1,7 @@
 import gravatar from "gravatar";
 import { nanoid } from "nanoid";
-import { sendVerificationEmail } from "../../shared/services/mail.js";
 import { User } from "../../users/schemas/user.schema.js";
+import { sendVerificationEmail } from "../../shared/services/mail.js";
 
 async function signupUser(body) {
   const { email, password } = body;
