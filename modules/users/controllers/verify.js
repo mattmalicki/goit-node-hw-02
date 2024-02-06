@@ -38,7 +38,8 @@ export async function verificationEmailRequest(req, res) {
       subject: "Verification request",
       text: `Hi. You've recieved this email because there has been a request to send again verification email. Ignore this email if it wasn't you. Here it is and this is your verification endpoint - users/verify/${user.verificationToken}`,
     });
+    return res.status(200).json("Email has been sent");
   } catch (e) {
-    res.status(500).json("Error occured", e.message);
+    return res.status(500).json("Error occured", e.message);
   }
 }
