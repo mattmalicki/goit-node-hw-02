@@ -1,7 +1,7 @@
 import gravatar from "gravatar";
 import { nanoid } from "nanoid";
 import { User } from "../../users/schemas/user.schema.js";
-import { sendVerificationEmail } from "../../shared/services/mail.js";
+import { sendVerificationEmail } from "../../shared/sevices/mail.js";
 
 async function signupUser(body) {
   const { email, password } = body;
@@ -27,6 +27,9 @@ async function loginUser(body) {
   const user = await User.findOne({ email });
   if (!user || !user.validatePassword(password)) {
     return { error: "Email or password incorrect." };
+  }
+  if (!user.verify) {
+    return { error: "Account not verified" };
   }
   return user;
 }
